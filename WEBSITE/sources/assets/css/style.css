@@ -269,6 +269,7 @@ body {
 }
 
 .typewriter {
+  flex-wrap: wrap;
   font-family: monospace; /* Use a monospace font for the typewriter effect */
   display: inline-block;
   overflow: hidden; /* Ensures the text is hidden until it's typed out */
@@ -504,7 +505,7 @@ body {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 10px; /* Optional: Adds space between images */
 }
 
