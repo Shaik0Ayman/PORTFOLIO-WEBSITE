@@ -152,10 +152,19 @@ html {
   scroll-behavior: smooth;
 }
 
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure the video is behind other content */
+  background-color: black; /* Fallback color while the video loads */
+}
+
 body {
   background-color: var(--bg-dark-purple);
-  background-image: url("../images/body-bg.jpg");
-  background-repeat: repeat;
   color: var(--text-gainsboro);
   font-family: var(--fontFamily-oxanium);
   font-size: var(--fontSize-4);
@@ -163,7 +172,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-
 ::-webkit-scrollbar { width: 8px; }
 
 ::-webkit-scrollbar-track { background-color: var(--bg-dark-purple); }
@@ -1256,3 +1264,81 @@ body {
   .footer .logo img { width: 205px; }
 
 }
+
+
+/* From Uiverse.io by Hashir-Ahmed123 */ 
+@keyframes drop {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(80px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* From Uiverse.io by Hashir-Ahmed123 */ 
+@keyframes drop {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(80px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+:root {
+  --color-bg1: rgb(108, 0, 162);
+  --color-bg2: rgb(0, 17, 82);
+  --color1: 18, 113, 255;
+  --color2: 221, 74, 255;
+  --color3: 100, 220, 255;
+  --color4: 200, 50, 50;
+  --color5: 180, 180, 50;
+  --color-interactive: 140, 100, 255;
+  --circle-size: 80%;
+  --blending: hard-light;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+
