@@ -135,3 +135,113 @@ document.addEventListener('mousemove', function(e) {
   heroBanner.style.transform = `translate(${moveX}px, ${moveY}px)`;
 });
 
+// ...existing code...
+
+// Carousel logic for all carousels on the page
+document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+  const carousel = wrapper.querySelector('.carousel');
+  const cards = carousel.querySelectorAll('.gallery-card');
+  const prevBtn = wrapper.querySelector('.carousel-btn.prev');
+  const nextBtn = wrapper.querySelector('.carousel-btn.next');
+  let currentIndex = 0;
+  const visibleCards = 3;
+
+  function updateCarousel() {
+    const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(carousel).gap) || 0;
+    carousel.scrollTo({
+      left: currentIndex * cardWidth,
+      behavior: 'smooth'
+    });
+    updateButtons();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = Math.max(currentIndex - visibleCards, 0);
+    updateCarousel();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = Math.min(currentIndex + visibleCards, cards.length - visibleCards);
+    updateCarousel();
+  });
+
+  function updateButtons() {
+    prevBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+    nextBtn.style.visibility = currentIndex >= cards.length - visibleCards ? 'hidden' : 'visible';
+  }
+  updateButtons();
+});
+
+// ...existing code...
+// ...existing code...
+
+document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+  const carousel = wrapper.querySelector('.carousel');
+  const cards = carousel.querySelectorAll('.gallery-card');
+  const prevBtn = wrapper.querySelector('.carousel-btn.prev');
+  const nextBtn = wrapper.querySelector('.carousel-btn.next');
+  let currentIndex = 0;
+  const visibleCards = 3;
+
+  function updateCarousel() {
+    const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(carousel).gap) || 0;
+    carousel.scrollTo({
+      left: currentIndex * cardWidth,
+      behavior: 'smooth'
+    });
+    updateButtons();
+  }
+
+  function updateButtons() {
+    prevBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+    nextBtn.style.visibility = currentIndex >= cards.length - visibleCards ? 'hidden' : 'visible';
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = Math.max(currentIndex - visibleCards, 0);
+    updateCarousel();
+    pauseAutoScroll();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = Math.min(currentIndex + visibleCards, cards.length - visibleCards);
+    updateCarousel();
+    pauseAutoScroll();
+  });
+
+  // --- Auto-scroll logic ---
+  let autoScrollInterval;
+  let autoScrollPaused = false;
+function autoScroll() {
+    if (autoScrollPaused) return;
+    currentIndex = Math.min(currentIndex + visibleCards, cards.length - visibleCards);
+    updateCarousel();
+  }
+  autoScrollInterval = setInterval(autoScroll, 8000);
+
+
+
+  
+
+  function pauseAutoScroll() {
+    autoScrollPaused = true;
+    clearInterval(autoScrollInterval);
+    setTimeout(() => {
+      autoScrollPaused = false;
+      startAutoScroll();
+    }, 10000); // pause for 8 seconds after interaction
+  }
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', pauseAutoScroll);
+  carousel.addEventListener('mouseleave', () => {
+    autoScrollPaused = false;
+    startAutoScroll();
+  });
+
+  updateCarousel();
+  startAutoScroll();
+});
+
+
+// ...existing code...
