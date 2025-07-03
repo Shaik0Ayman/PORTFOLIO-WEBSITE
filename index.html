@@ -156,8 +156,24 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 
   <style>
+    /* Fix excessive hero section padding */
+    @media (min-width: 1200px) {
+      .hero {
+        padding-block-start: 120px !important; /* Reduced from 250px */
+      }
+    }
+    
+    /* Ensure consistent hero padding across all screen sizes */
+    .hero {
+      padding-block-start: 80px; /* Reduced from 100px */
+    }
+    
     /* Mobile-responsive project cards */
     @media (max-width: 768px) {
+      .hero {
+        padding-block-start: 60px; /* Even less padding on mobile */
+      }
+      
       .carousel-wrapper {
         position: relative;
         overflow: visible !important;
