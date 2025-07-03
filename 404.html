@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Ayman Codes</title>
+    <meta name="description" content="Sorry, the page you're looking for doesn't exist. Return to Ayman's portfolio website.">
+    <link rel="canonical" href="https://ayman.codes/404.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/images/logo.svg">
+    
+    <!-- Styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Oxanium', cursive;
+            background: linear-gradient(135deg, #1e1e2e, #2d1b69);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #f05afb, #6be4fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            margin: 1rem 0;
+            color: #ffffff;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            margin: 2rem 0;
+            color: #b8b8b8;
+            line-height: 1.6;
+        }
+        
+        .back-home {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #f05afb, #6be4fd);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(240, 90, 251, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Page Not Found</h2>
+        <p class="error-message">
+            Oops! It seems the page you're looking for has wandered into the digital void. 
+            Don't worry, even the best developers encounter 404s!
+        </p>
+        <a href="/" class="back-home">← Back to Portfolio</a>
+    </div>
+    
+    <!-- Google Analytics (if you have it) -->
+    <script>
+        // Track 404 errors
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_not_found', {
+                'page_title': '404 - Page Not Found',
+                'page_location': window.location.href
+            });
+        }
+    </script>
+</body>
+</html>

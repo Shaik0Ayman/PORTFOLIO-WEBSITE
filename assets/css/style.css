@@ -1,5 +1,3 @@
-
-
 :root {
 
   /**
@@ -153,22 +151,56 @@ html {
 }
 
 body {
-  background-color: var(--bg-dark-purple);
-  background-image: url("../images/body-bg.jpg");
-  background-repeat: repeat;
+  background-color: #0a0015; /* Fallback color */
   color: var(--text-gainsboro);
   font-family: var(--fontFamily-oxanium);
   font-size: var(--fontSize-4);
   font-weight: var(--weight-regular);
   line-height: 1.6;
   overflow-x: hidden;
+  position: relative;
 }
 
-::-webkit-scrollbar { width: 8px; }
+/* Background Video Container */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
 
-::-webkit-scrollbar-track { background-color: var(--bg-dark-purple); }
+/* Background Video Styles */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
 
-::-webkit-scrollbar-thumb { background-color: var(--bg-purple); }
+.background-video.active {
+  opacity: 1;
+}
+
+/* Overlay to ensure text readability */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+  pointer-events: none;
+}
 
 
 
@@ -1257,6 +1289,49 @@ body {
 
 }
 
+/* Performance optimization for mobile devices */
+@media (max-width: 768px) {
+  body {
+    animation-duration: 20s; /* Slower animation on mobile */
+  }
+  
+  body::before {
+    animation-duration: 30s;
+  }
+  
+  body::after {
+    animation-duration: 35s;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation-duration: 60s; /* Much slower animation instead of none */
+  }
+  
+  body::before {
+    animation-duration: 80s;
+  }
+  
+  body::after {
+    animation: none; /* Remove the sliding pattern for reduced motion */
+  }
+}
+
+/* Enhanced container styles for better contrast */
+.section {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0.5px);
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* Ensure content remains readable */
+.container {
+  position: relative;
+  z-index: 1;
+}
 
 /* From Uiverse.io by Hashir-Ahmed123 */ 
 @keyframes drop {
@@ -1495,3 +1570,4 @@ body {
     max-width: 90vw;
   }
 }
+
