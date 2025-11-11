@@ -245,3 +245,93 @@ function autoScroll() {
 
 
 // ...existing code...
+// --- EMTI Case Study: PDF list + client-side preview ---
+function initEmtiCaseStudy() {
+  const listEl = document.getElementById('pdf-list');
+  const uploadInput = document.getElementById('pdf-upload');
+  const previewEl = document.getElementById('pdf-preview');
+
+  if (!listEl) return; // nothing to do on pages without the section
+
+  // Load manifest of PDFs (static list maintained by editing assets/pdfs/list.json)
+  fetch('./assets/pdfs/list.json', { cache: 'no-store' })
+    .then(res => {
+      if (!res.ok) throw new Error('list.json not found');
+      return res.json();
+    })
+    .then(list => {
+      if (!Array.isArray(list) || list.length === 0) {
+        listEl.innerHTML = '<p style="color:#666">No PDFs added yet. To add permanently, put files in <code>assets/pdfs/</code> and update <code>assets/pdfs/list.json</code>.</p>';
+        return;
+      }
+
+      const ul = document.createElement('ul');
+      ul.style.listStyle = 'none';
+      ul.style.padding = '0';
+
+      list.forEach(filename => {
+        const li = document.createElement('li');
+        li.style.margin = '0.6rem 0';
+
+        const a = document.createElement('a');
+        // Support either a plain filename (assumed in ./assets/pdfs/) or a path
+        let href;
+        if (filename.includes('/') || filename.startsWith('.')) {
+          // treat as a path; encode URI to preserve slashes
+          href = encodeURI(filename.startsWith('./') ? filename : './' + filename);
+        } else {
+          href = './assets/pdfs/' + encodeURIComponent(filename);
+        }
+
+        a.href = href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        // show basename when a path is provided
+        a.textContent = filename.includes('/') ? filename.split('/').pop() : filename;
+        a.className = 'link';
+
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+
+      listEl.appendChild(ul);
+    })
+    .catch(() => {
+      listEl.innerHTML = '<p style="color:#c00">Could not load PDF list.</p>';
+    });
+
+  // Client-side preview for immediate testing (no server upload)
+  if (uploadInput && previewEl) {
+    uploadInput.addEventListener('change', (e) => {
+      previewEl.innerHTML = '';
+      const files = Array.from(e.target.files || []);
+      if (files.length === 0) return;
+
+      files.forEach(file => {
+        if (file.type !== 'application/pdf') return;
+
+        const url = URL.createObjectURL(file);
+        const wrapper = document.createElement('div');
+        wrapper.style.marginBottom = '1rem';
+
+        const title = document.createElement('div');
+        title.textContent = file.name;
+        title.style.fontWeight = '600';
+        title.style.marginBottom = '0.5rem';
+
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.width = '100%';
+        iframe.height = '600';
+        iframe.style.border = '1px solid #ccc';
+        iframe.style.borderRadius = '6px';
+
+        wrapper.appendChild(title);
+        wrapper.appendChild(iframe);
+        previewEl.appendChild(wrapper);
+      });
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initEmtiCaseStudy);
